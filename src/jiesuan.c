@@ -1,3 +1,14 @@
+/*
+ *jiesuan.c
+ *æ ¸å¿ƒæ–‡ä»¶
+ *
+ *Change Logs:
+ *Date           Author        Notes                 mail
+ *2020.5.29      ts-199        first version         1428381962@qq.com
+ *
+ *
+ */
+
 #include "jiesuan.h"
 #include "math.h"
 
@@ -48,13 +59,13 @@ gy=gy/norm2;
 gz=gz/norm2;
 mx=mx/norm3;
 my=my/norm3;
-mz=mz/norm3;             //±ê×¼»¯
+mz=mz/norm3;             //æ ‡å‡†åŒ–
 
 ex1=rzy*az-rzz*ay;
 ey1=rzz*ax-rzx*az;
-ez1=rzx*ay-rzy*ax;     //¼ÓËÙ¶È¼ÆµÄ²æ»ı
+ez1=rzx*ay-rzy*ax;     //åŠ é€Ÿåº¦è®¡çš„å‰ç§¯
 
-fro_fai=inv_sqrt(1.0/(rxx*rxx+ryx*ryx))*(rxx*self_sin(y_m)-ryx*self_cos(y_m));   //´ÅÁ¦¼ÆÆ«²î Ç°ÃæÏµÊı
+fro_fai=inv_sqrt(1.0/(rxx*rxx+ryx*ryx))*(rxx*self_sin(y_m)-ryx*self_cos(y_m));   //ç£åŠ›è®¡åå·® å‰é¢ç³»æ•°
 
 ex2=fro_fai*rzx;
 ey2=fro_fai*rzy;
@@ -62,7 +73,7 @@ ey2=fro_fai*rzz;      //
 
 gx+=kp1*ex1+ki1*integral_ex1*T+kp2*ex2+ki2*integral_ex2*T;
 gy+=kp1*ey1+ki1*integral_ey1*T+kp2*ey2+ki2*integral_ey2*T;
-gz+=kp1*ez1+ki1*integral_ez1*T+kp2*ez2+ki2*integral_ez2*T;    //½ÃÕı½Ç¼ÓËÙ¶È
+gz+=kp1*ez1+ki1*integral_ez1*T+kp2*ez2+ki2*integral_ez2*T;    //çŸ«æ­£è§’åŠ é€Ÿåº¦
 
 exx=rxy*gz*T-gy*T*rxz;
 exy=rxz*gx*T-rxx*gz*T;
@@ -74,7 +85,7 @@ eyz=ryx*gy*T-ryy*gx*T;
 
 ezx=rzy*gz*T-rzz*gy*T;
 ezy=rzz*gx*T-rzx*gz*T;
-ezz=rzx*gy*T-rzy*gx*T;          //·½ÏòÓàÏÒ¾ØÕóÔöÁ¿
+ezz=rzx*gy*T-rzy*gx*T;          //æ–¹å‘ä½™å¼¦çŸ©é˜µå¢é‡
 
 rxx+=exx;
 rxy+=exy;
@@ -86,7 +97,7 @@ ryz+=eyz;
 
 rzx+=ezx;
 rzy+=ezy;
-rzz+=ezz;                       //¸üĞÂ·½ÏòÓàÏÒ¾ØÕó
+rzz+=ezz;                       //æ›´æ–°æ–¹å‘ä½™å¼¦çŸ©é˜µ
 
 }
 
