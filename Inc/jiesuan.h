@@ -1,16 +1,16 @@
 /*
  *jiesuan.h - The C head file of the jiesuan.c
  *
- *ÓÃÍ¾£º¹æ¶¨ÁË1¡¢Èı½Çº¯Êı±íµÄÄÚÈİ£»2¡¢´ÅÁ¦¼Æ ÍÓÂİÒÇ ¼ÓËÙ¶È¼Æ¸÷Èı¸ö·½ÏòµÄÁ¿¡¢²î¼°Îó²îÀÛ¼Æ£»
- *3¡¢kp ki£»4¡¢½âËãµÄºËĞÄº¯Êı£»5¡¢×Ô¼º¶¨ÒåµÄÓÃÓÚ¼ÆËãµÄº¯Êı
+ *ç”¨é€”ï¼šè§„å®šäº†1ã€ä¸‰è§’å‡½æ•°è¡¨çš„å†…å®¹ï¼›2ã€ç£åŠ›è®¡ é™€èºä»ª åŠ é€Ÿåº¦è®¡å„ä¸‰ä¸ªæ–¹å‘çš„é‡ã€å·®åŠè¯¯å·®ç´¯è®¡ï¼›
+ *3ã€kp kiï¼›4ã€è§£ç®—çš„æ ¸å¿ƒå‡½æ•°ï¼›5ã€è‡ªå·±å®šä¹‰çš„ç”¨äºè®¡ç®—çš„å‡½æ•°
  *
- *Note:´ËËã·¨Ô´×Ô     »ùÓÚ»¥²¹ÂË²¨Æ÷µÄËÄĞıÒí·ÉĞĞÆ÷×ËÌ¬½âËã___ÁºÑÓµÂ£¬³ÌÃô£¬ºÎ¸£±¾£¬Àîº½
+ *Note:æ­¤ç®—æ³•æºè‡ª     åŸºäºäº’è¡¥æ»¤æ³¢å™¨çš„å››æ—‹ç¿¼é£è¡Œå™¨å§¿æ€è§£ç®—___æ¢å»¶å¾·ï¼Œç¨‹æ•ï¼Œä½•ç¦æœ¬ï¼Œæèˆª
  *
  *
  *Change Logs:
  *Date         Author    Notes            mail  
  *2020-5.27    ts-199    first version    1428381962@qq.com
- *
+ *2020-5.29    ts-199    ä¿®è¡¥             1428381962@qq.com
  */
  
 
@@ -22,11 +22,11 @@
 #define _hubu_h
 
 /*private defines-------------------------------------------*/
-#define  delta  0.0349f               //Èı½Çº¯Êı±í²½³¤£¨ÊıÖµÊÇ»¡¶È£©
-#define  T      0.001                 //²ÉÑùÖÜÆÚ£¨£¿
-#define  g      9.8                     //ÖØÁ¦¼ÓËÙ¶È£¨²»Öª´Ë´¦×¼È·Öµ£¬ÏÈÒÔ9.8£©
+#define  delta  0.0349f               //ä¸‰è§’å‡½æ•°è¡¨æ­¥é•¿ï¼ˆæ•°å€¼æ˜¯å¼§åº¦ï¼‰
+#define  T      0.001                 //é‡‡æ ·å‘¨æœŸï¼ˆï¼Ÿ
+#define  g      9.8                     //é‡åŠ›åŠ é€Ÿåº¦ï¼ˆä¸çŸ¥æ­¤å¤„å‡†ç¡®å€¼ï¼Œå…ˆä»¥9.8ï¼‰
 
-/* ±ğÃû(ÎÒÏ°¹ßÕâ¸ö£© */
+/* åˆ«å(æˆ‘ä¹ æƒ¯è¿™ä¸ªï¼‰ */   //ValueXè¿™æ ·çš„æ ‡è¯†æ˜¯å¦ä¸€ä¸ªäººå†™çš„ï¼Œä¸»è¦æ˜¯æœ€å¼€å§‹å¾—åˆ°çš„åŸå§‹æ•°æ®ï¼Œä¸€å¼€å§‹æˆ‘å°±ç”¨çš„mxä¹‹ç±»ï¼Œéš¾å¾—æ”¹äº†
 #define mx ValueX
 #define my ValueY
 #define mz ValueZ
@@ -44,9 +44,9 @@ float exx=0,exy=0,exz=0,eyx=0,eyy=0,eyz=0,ezx=0,ezy=0,ezz=0;
 float rxx=1,rxy=1,rxz=1,ryx=1,ryy=1,ryz=1,rzx=1,rzy=1,rzz=1;
 float ex1=0,ey1=0,ez1=0,ex2=0,ey2=0,ez2=0;
 
-float p_a=0,r_a=0,y_m=0;     //Èı¸öĞı×ª½Ç   ¼Ó¼Æ»ò´ÅÁ¦¼ÆµÃµ½µÄ£¬²»ÊÇÈÚºÏ
+float p_a=0,r_a=0,y_m=0;     //ä¸‰ä¸ªæ—‹è½¬è§’   åŠ è®¡æˆ–ç£åŠ›è®¡å¾—åˆ°çš„ï¼Œä¸æ˜¯èåˆ
 
-/* Èı½Çº¯Êı±í*/
+/* ä¸‰è§’å‡½æ•°è¡¨*/
 float s_sin[46]={0.00f,0.0349f,0.0697f,0.104f,0.139f,0.173f,0.208f,0.242f,0.275f,0.309f,
 	0.342f,0.374f,0.407f,0.438f,0.470f,0.500f,0.530f,0.560f,0.587f,0.615f,0.642f,0.670f,0.694f,
 	0.720f,0.743f,0.766f,0.788f,0.809f,0.829f,0.848f,0.866f,0.883f,0.898f,0.913f,0.927f,0.939f,0.951f,
@@ -57,26 +57,26 @@ float s_cos[46]={1.0f,0.999f,0.997f,0.994f,0.990f,0.985f,0.978f,0.970f,0.961f,0.
 	0.035f,0.0f};
 
 
-float fro_fai=0;   //ÖĞ¼äÁ¿
+float fro_fai=0;   //ä¸­é—´é‡
 
 float kp1=0.5,kp2=0.5,ki1=0.05,ki2=0.05;   //pi
 
-float norm1=0,norm2=0,norm3=0;      //±ê×¼»¯£¨¼Ó¼Æ¡¢´ÅÁ¦¼Æ¡¢ÍÓÂİÒÇ£©   
+float norm1=0,norm2=0,norm3=0;      //æ ‡å‡†åŒ–ï¼ˆåŠ è®¡ã€ç£åŠ›è®¡ã€é™€èºä»ªï¼‰   
 
-float integral_ex1=0,integral_ey1=0,integral_ez1=0;         //¼ÓËÙ¶ÈÎó²î»ıÀÛ
-float integral_ex2=0,integral_ey2=0,integral_ez2=0;         //´ÅÁ¦¼ÆÎó²î»ıÀÛ
+float integral_ex1=0,integral_ey1=0,integral_ez1=0;         //åŠ é€Ÿåº¦è¯¯å·®ç§¯ç´¯
+float integral_ex2=0,integral_ey2=0,integral_ez2=0;         //ç£åŠ›è®¡è¯¯å·®ç§¯ç´¯
 
 /*private function----------------------------------------*/
 
-/*ºËĞÄ½âËãµÄº¯Êı*/	
-void update(float ax,float ay,float az, float gx,float gy,float gz,float mx,float my,float mz);    //·½ÏòÓàÏÒ¸üĞÂ
-void accel_jiesuan_fai(float ax,float ay,float az,float mx,float my,float mz);                     //ÓÉ´ÅÁ¦¼Æ´ïµ½º½Ïò½Ç
+/*æ ¸å¿ƒè§£ç®—çš„å‡½æ•°*/	
+void update(float ax,float ay,float az, float gx,float gy,float gz,float mx,float my,float mz);    //æ–¹å‘ä½™å¼¦æ›´æ–°
+void accel_jiesuan_fai(float ax,float ay,float az,float mx,float my,float mz);                     //ç”±ç£åŠ›è®¡è¾¾åˆ°èˆªå‘è§’
 
 
-/* ¼ÆËãÒªÓÃµ½µÄ*/	
-float inv_sqrt(float x);     //
-float self_sin(float x);     //×Ô¼ºµÄsinº¯Êı
-float self_cos(float x);     //×Ô¼ºµÄcosº¯Êı
+/* è®¡ç®—è¦ç”¨åˆ°çš„*/	
+float inv_sqrt(float x);     //å¹³æ–¹æ ¹å€’æ•°
+float self_sin(float x);     //è‡ªå·±çš„sinå‡½æ•°
+float self_cos(float x);     //è‡ªå·±çš„coså‡½æ•°
 
 
 #endif
