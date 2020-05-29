@@ -11,7 +11,7 @@
 
 #include "jiesuan.h"
 #include "math.h"
-
+/*****解所需要的航向角fai*****/
 void accel_jiesuan_fai(float ax,float ay,float az,float mx,float my,float mz)
 {
 r_a=atan(ax/az);
@@ -21,7 +21,7 @@ y_m=atan((mx*self_sin(r_a)*self_sin(p_a)+mz*self_cos(r_a)*self_sin(p_a)+my*self_
 }
 
 
-
+/***自己的sin函数    利用表存储起来，减少实际运行时的计算时间***/
 float self_sin(float x)
 {
 int m=0;
@@ -33,6 +33,7 @@ return s_sin[m]+k*yu;
 
 }
 
+/***自己的cos函数 ***/
 float self_cos(float x)
 {
 int m=0;
@@ -44,7 +45,7 @@ return s_cos[m]+k*yu;
 
 }
 
-
+/***核心解算的函数  具体理解参照那篇论文***/
 void update(float ax,float ay,float az,float gx,float gy,float gz,float mx,float my,float mz)
 {
 norm1=inv_sqrt(ax*ax+ay*ay+az*az);
@@ -101,7 +102,7 @@ rzz+=ezz;                       //更新方向余弦矩阵
 
 }
 
-
+/***平方根倒数函数***/
 float inv_sqrt(float x) {
 	float halfx = 0.5f * x;
 	float y = x;
